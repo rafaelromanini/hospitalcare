@@ -26,4 +26,13 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
+
+    public Appointment() {}
+
+    public Appointment(Doctor doctor, Patient patient, LocalDateTime dateTime) {
+        this.doctor = doctor;
+        this.patient = patient;
+        this.dateTime = dateTime;
+        this.status = AppointmentStatus.SCHEDULED;
+    }
 }

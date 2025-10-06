@@ -20,4 +20,13 @@ public class Doctor {
     private Specialty specialty;
 
     private String phone;
+
+    public Doctor() {}
+
+    public Doctor(String name, String crm, Specialty specialty, String phone) {
+        this.name = name;
+        this.crm = crm;
+        this.specialty = specialty;
+        this.phone = phone;
+    }
 }

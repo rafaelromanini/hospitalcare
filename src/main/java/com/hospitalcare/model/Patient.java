@@ -17,4 +17,14 @@ public class Patient {
     private String phone;
     private String address;
     private LocalDate birthDate;
+
+    public Patient() {}
+
+    public Patient(String name, String cpf, String phone, String address, LocalDate birthDate) {
+        this.name = name;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.address = address;
+        this.birthDate = birthDate;
+    }
 }

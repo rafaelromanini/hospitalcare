@@ -21,4 +21,14 @@ public class MedicalRecord {
     @ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
+
+    public MedicalRecord() {}
+
+    public MedicalRecord(Patient patient, String diagnosis, String prescription, String notes) {
+        this.patient = patient;
+        this.diagnosis = diagnosis;
+        this.prescription = prescription;
+        this.notes = notes;
+        this.date = LocalDate.now();
+    }
 }
