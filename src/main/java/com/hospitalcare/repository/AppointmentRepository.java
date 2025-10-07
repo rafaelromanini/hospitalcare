@@ -1,7 +1,7 @@
-package com.hospitalcare.repository;
+package com.hospitalcare.hospitalcare.repository;
 
-import com.hospitalcare.model.Appointment;
-import com.hospitalcare.model.enums.AppointmentStatus;
+import com.hospitalcare.hospitalcare.model.Appointment;
+import com.hospitalcare.hospitalcare.model.enums.AppointmentStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
