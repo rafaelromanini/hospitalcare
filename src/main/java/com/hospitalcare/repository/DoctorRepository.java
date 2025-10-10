@@ -12,10 +12,12 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
     Optional<Doctor> findByCrm(String crm);
 
-    boolean existsByCrm(String crm);
-
     List<Doctor> findBySpecialty(Specialty specialty);
 
     @Query("SELECT d FROM Doctor d WHERE LOWER(d.name) LIKE LOWER(CONCAT(:name, '%'))")
     List<Doctor> searchByName(@Param("name") String name);
+
+    boolean existsByCpf(String cpf);
+
+    boolean existsByCrm(String crm);
 }

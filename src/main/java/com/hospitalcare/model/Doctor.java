@@ -14,6 +14,7 @@ public class Doctor {
     private Long id;
 
     private String name;
+    private String cpf;
     private String crm;
 
     @Enumerated(EnumType.STRING)
@@ -23,8 +24,9 @@ public class Doctor {
 
     public Doctor() {}
 
-    public Doctor(String name, String crm, Specialty specialty, String phone) {
+    public Doctor(String name, String cpf,String crm, Specialty specialty, String phone) {
         this.name = name;
+        this.cpf = cpf;
         this.crm = crm;
         this.specialty = specialty;
         this.phone = phone;
