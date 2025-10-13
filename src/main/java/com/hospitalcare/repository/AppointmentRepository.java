@@ -27,4 +27,13 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
     @Query("SELECT a FROM Appointment a WHERE a.status = :status ORDER BY a.dateTime ASC")
     List<Appointment> findAllByStatusOrdered(@Param("status") AppointmentStatus status);
+
+    @Query("""
+       SELECT CASE WHEN COUNT(a) > 0 THEN TRUE ELSE FALSE END 
+       FROM Appointment a 
+       WHERE a.doctor.id = :doctorId 
+       AND a.dateTime BETWEEN :start AND :end
+       """)
+    boolean hasConflictWithinRange(Long doctorId, LocalDateTime start, LocalDateTime end);
+
 }

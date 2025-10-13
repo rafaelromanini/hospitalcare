@@ -16,6 +16,7 @@ import com.hospitalcare.repository.PatientRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -41,9 +42,13 @@ public class AppointmentService {
                 .orElseThrow(() -> new PatientNotFoundException(dto.patientId()));
 
         // Business rule: prevent double booking for the same doctor/dateTime
-        if (appointmentRepository.existsByDoctorIdAndDateTime(doctor.getId(), dto.dateTime())) {
-            throw new AppointmentConflictException(doctor.getId(), dto.dateTime());
+        LocalDateTime start = dto.dateTime().minusMinutes(29);
+        LocalDateTime end = dto.dateTime().plusMinutes(29);
+
+        if (appointmentRepository.hasConflictWithinRange(doctor.getId(), start, end)) {
+            throw new AppointmentConflictException(doctor.getName(), dto.dateTime());
         }
+
 
         Appointment appt = new Appointment(doctor, patient, dto.dateTime()); // sets SCHEDULED by constructor
         Appointment saved = appointmentRepository.save(appt);
@@ -81,8 +86,9 @@ public class AppointmentService {
     private AppointmentResponseDTO toResponse(Appointment a) {
         return new AppointmentResponseDTO(
                 a.getId(),
-                a.getDoctor().getId(),
-                a.getPatient().getId(),
+                a.getDoctor().getName(),
+                a.getPatient().getName(),
+                a.getPatient().getCpf(),
                 a.getDateTime(),
                 a.getStatus()
         );

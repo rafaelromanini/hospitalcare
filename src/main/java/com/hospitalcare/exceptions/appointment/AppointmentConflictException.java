@@ -2,7 +2,6 @@ package com.hospitalcare.exceptions.appointment;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
 import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
@@ -10,14 +9,14 @@ import java.time.LocalDateTime;
 public class AppointmentConflictException extends RuntimeException {
 
     private static final String DEFAULT_MESSAGE =
-            "Doctor with ID %d already has an appointment at %s.";
+            "Doctor %s already has an appointment scheduled at %s.";
 
-    private final Long doctorId;
+    private final String doctorName;
     private final LocalDateTime dateTime;
 
-    public AppointmentConflictException(Long doctorId, LocalDateTime dateTime) {
-        super(String.format(DEFAULT_MESSAGE, doctorId, dateTime));
-        this.doctorId = doctorId;
+    public AppointmentConflictException(String doctorName, LocalDateTime dateTime) {
+        super(String.format(DEFAULT_MESSAGE, doctorName, dateTime));
+        this.doctorName = doctorName;
         this.dateTime = dateTime;
     }
 }
