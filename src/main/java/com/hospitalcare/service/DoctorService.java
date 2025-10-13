@@ -2,9 +2,8 @@ package com.hospitalcare.service;
 
 import com.hospitalcare.dto.DoctorRequestDTO;
 import com.hospitalcare.dto.responses.DoctorResponseDTO;
-import com.hospitalcare.dto.responses.PatientResponseDTO;
-import com.hospitalcare.exceptions.CpfCannotBeChangedException;
-import com.hospitalcare.exceptions.doctor.DoctorCpfAlreadyExistsException;
+    import com.hospitalcare.exceptions.CpfCannotBeChangedException;
+import com.hospitalcare.exceptions.doctor.DoctorAlreadyExistsException;
 import com.hospitalcare.exceptions.doctor.DoctorCrmAlreadyExistsException;
 import com.hospitalcare.exceptions.doctor.DoctorNotFoundException;
 import com.hospitalcare.model.Doctor;
@@ -82,7 +81,7 @@ public class DoctorService {
 
     private void validateUniqueFields(DoctorRequestDTO dto) {
         if (repository.existsByCpf(dto.cpf())) {
-            throw new DoctorCpfAlreadyExistsException(dto.cpf());
+            throw new DoctorAlreadyExistsException(dto.cpf());
         }
         if (repository.existsByCrm(dto.crm())) {
             throw new DoctorCrmAlreadyExistsException(dto.crm());

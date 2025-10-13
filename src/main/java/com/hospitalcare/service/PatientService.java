@@ -2,8 +2,8 @@ package com.hospitalcare.service;
 
 import com.hospitalcare.dto.PatientRequestDTO;
 import com.hospitalcare.dto.responses.PatientResponseDTO;
-import com.hospitalcare.exceptions.CpfAlreadyExistsException;
 import com.hospitalcare.exceptions.CpfCannotBeChangedException;
+import com.hospitalcare.exceptions.patient.PatientAlreadyExistsException;
 import com.hospitalcare.exceptions.patient.PatientNotFoundException;
 import com.hospitalcare.model.Patient;
 import com.hospitalcare.repository.PatientRepository;
@@ -24,7 +24,7 @@ public class PatientService {
     @Transactional
     public PatientResponseDTO create(PatientRequestDTO dto) {
         if (repository.existsByCpf(dto.cpf())) {
-            throw new CpfAlreadyExistsException(dto.cpf());
+            throw new PatientAlreadyExistsException(dto.cpf());
         }
         Patient patient = toEntity(dto);
         Patient saved = repository.save(patient);
