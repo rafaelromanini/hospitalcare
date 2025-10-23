@@ -2,6 +2,7 @@
 
 ![Java](https://img.shields.io/badge/Java-17-blue?logo=openjdk)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?logo=springboot)
+![Docker](https://img.shields.io/badge/Docker-Containerization-2496ED?logo=docker&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue?logo=postgresql)
 ![Maven](https://img.shields.io/badge/Maven-Build%20Tool-orange?logo=apachemaven)
 ![REST API](https://img.shields.io/badge/REST-API-lightgrey?logo=swagger)
@@ -26,6 +27,7 @@
 |------------|-------------|--------|
 | Linguagem | **Java 17** | ☕ |
 | Framework | **Spring Boot 3.5.6** | ![Spring](https://img.shields.io/badge/Spring-6DB33F?logo=spring&logoColor=white) |
+| Containerização | **Docker & Docker Compose** | ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white) |
 | Banco de Dados | **PostgreSQL** | ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql&logoColor=white) |
 | ORM | **Spring Data JPA** | 🗃️ |
 | Validações | **Jakarta Validation (Bean Validation)** | ✅ |
@@ -129,6 +131,7 @@ src/
 - ☕ **Java 17+**
 - 🐘 **PostgreSQL**
 - 🧰 **Maven**
+- 🐳 Docker (opcional)
 
 ### 🗂️ Clonar o repositório
 ```
@@ -161,6 +164,43 @@ API disponível em:
 ```
 http://localhost:8080
 ```
+## 🐳 Configuração com Docker (opcional)
+
+Caso prefira não instalar o PostgreSQL manualmente, você pode usar o **Docker Compose** incluído no projeto.
+
+### Arquivo: `docker-compose.yml`
+
+```yaml
+name: hospitalcare
+services:
+  postgres:
+    container_name: postgres_db
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=hospitalcare_db'
+      - 'POSTGRES_PASSWORD=password'
+      - 'POSTGRES_USER=postgres'
+    ports:
+      - '5432:5432'
+```
+📦 Subir o container
+```bash
+docker compose up -d
+docker ps
+```
+🗄️ Banco disponível em
+```bash
+jdbc:postgresql://localhost:5432/hospitalcare_db
+```
+⚙️ Atualize o application.yml se necessário
+```yaml
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/hospitalcare_db
+    username: postgres
+    password: password
+```
+
 ### 🧩 Endpoints Principais
 | Método   | Endpoint                      | Descrição                 |
 | -------- | ----------------------------- | ------------------------- |
