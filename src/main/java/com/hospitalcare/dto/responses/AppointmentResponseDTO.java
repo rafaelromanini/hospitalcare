@@ -5,8 +5,9 @@ import java.time.LocalDateTime;
 
 public record AppointmentResponseDTO(
         Long id,
-        Long doctorId,
-        Long patientId,
+        String doctorName,
+        String patientName,
+        String patientCpf,
         LocalDateTime dateTime,
         AppointmentStatus status
 ) {}
